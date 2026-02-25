@@ -16,7 +16,7 @@ const links = {
     { label: 'Audit Reports', href: '#' },
   ],
   Community: [
-    { label: 'Twitter / X', href: '#' },
+    { label: 'Twitter / X', href: 'https://x.com/flowagent_dev' },
     { label: 'Telegram', href: '#' },
     { label: 'Discord', href: '#' },
     { label: 'Roadmap', href: '#roadmap' },

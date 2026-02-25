@@ -175,7 +175,9 @@ export default function Hero() {
           {/* Row 2 */}
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
-              href="#"
+              href="https://x.com/flowagent_dev"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative w-48 text-center px-8 py-3.5 font-semibold text-flow-bg bg-flow-blue rounded-full glow-blue hover:scale-105 active:scale-95 transition-all duration-150 text-base overflow-hidden flex items-center justify-center gap-2"
             >
               <svg className="w-4 h-4 relative z-10 shrink-0" fill="currentColor" viewBox="0 0 24 24">
