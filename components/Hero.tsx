@@ -1,8 +1,11 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import FlowCanvas from './FlowCanvas'
+
+const CA = 'BfbVx6Lh66sipeSiGTCNThtuKzz3qC7eezkymbw2pump'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -14,6 +17,14 @@ const fadeUp = {
 }
 
 export default function Hero() {
+  const [copied, setCopied] = useState(false)
+
+  const copyCA = () => {
+    navigator.clipboard.writeText(CA)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
     <section
       id="hero"
@@ -187,7 +198,9 @@ export default function Hero() {
               <div className="absolute inset-0 bg-gradient-to-r from-flow-blue to-cyan-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" />
             </a>
             <a
-              href="#"
+              href={`https://pump.fun/coin/${CA}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-48 text-center px-8 py-3.5 font-semibold text-white border border-white/20 rounded-full hover:border-flow-blue/50 hover:text-flow-blue hover:bg-flow-blue/5 transition-all duration-200 text-base flex items-center justify-center gap-2"
             >
               <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -196,6 +209,33 @@ export default function Hero() {
               Chart
             </a>
           </div>
+
+          {/* CA display */}
+          <motion.button
+            onClick={copyCA}
+            className="group flex items-center gap-3 px-5 py-2.5 rounded-xl border border-flow-blue/20 bg-flow-blue/5 hover:border-flow-blue/40 hover:bg-flow-blue/10 transition-all duration-200 cursor-pointer"
+            whileTap={{ scale: 0.97 }}
+          >
+            <span className="font-mono text-xs text-white/30 tracking-widest uppercase">CA</span>
+            <span className="font-mono text-xs text-white/60 tracking-wide truncate max-w-[220px] sm:max-w-none">
+              {CA}
+            </span>
+            <span className="shrink-0 text-flow-blue/60 group-hover:text-flow-blue transition-colors duration-200">
+              {copied ? (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" />
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" strokeLinecap="round" />
+                </svg>
+              )}
+            </span>
+            {copied && (
+              <span className="absolute font-mono text-xs text-flow-blue animate-pulse">Copied!</span>
+            )}
+          </motion.button>
         </motion.div>
 
         {/* Stats bar */}

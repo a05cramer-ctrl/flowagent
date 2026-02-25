@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const allocations = [
@@ -13,13 +14,22 @@ const allocations = [
 const highlights = [
   { label: 'Total Supply', value: '1,000,000,000', unit: 'FLOW' },
   { label: 'Initial Circulating', value: '250,000,000', unit: 'FLOW' },
-  { label: 'Token Standard', value: 'ERC-20', unit: '' },
+  { label: 'Token Standard', value: 'SPL', unit: 'Solana' },
   { label: 'Tax', value: '0%', unit: 'Buy / Sell' },
 ]
 
+const CA = 'BfbVx6Lh66sipeSiGTCNThtuKzz3qC7eezkymbw2pump'
+
 export default function Tokenomics() {
+  const [copied, setCopied] = useState(false)
   const circumference = 2 * Math.PI * 60
   let cumulativePercent = 0
+
+  const copyCA = () => {
+    navigator.clipboard.writeText(CA)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   return (
     <section id="tokenomics" className="relative py-28 overflow-hidden">
@@ -77,6 +87,42 @@ export default function Tokenomics() {
             </motion.div>
           ))}
         </div>
+
+        {/* CA display */}
+        <motion.button
+          onClick={copyCA}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          whileTap={{ scale: 0.98 }}
+          className="group w-full mb-16 flex flex-col sm:flex-row items-center justify-between gap-3 px-6 py-4 rounded-2xl border border-flow-blue/20 bg-flow-card/50 hover:border-flow-blue/40 hover:bg-flow-blue/5 transition-all duration-200 cursor-pointer text-left"
+        >
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-xs text-flow-blue/60 tracking-[0.2em] uppercase shrink-0">Contract Address</span>
+            <span className="font-mono text-sm text-white/50 group-hover:text-white/80 transition-colors break-all">
+              {CA}
+            </span>
+          </div>
+          <div className="shrink-0 flex items-center gap-2 text-flow-blue/50 group-hover:text-flow-blue transition-colors duration-200">
+            {copied ? (
+              <>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span className="font-mono text-xs">Copied!</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" />
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" strokeLinecap="round" />
+                </svg>
+                <span className="font-mono text-xs">Copy CA</span>
+              </>
+            )}
+          </div>
+        </motion.button>
 
         {/* Allocation section */}
         <div className="grid lg:grid-cols-2 gap-12 items-center">
