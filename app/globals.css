@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --blue: #00d4ff;
+  --gold: #ffd700;
+  --bg: #020212;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #020212;
+  color: white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #020212;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.25);
+  border-radius: 2px;
+}
+
+@layer utilities {
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.35), 0 0 60px rgba(0, 212, 255, 0.15);
+  }
+  .glow-blue-sm {
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3), 0 0 30px rgba(0, 212, 255, 0.1);
+  }
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.35), 0 0 60px rgba(255, 215, 0, 0.15);
+  }
+  .text-glow-blue {
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.7), 0 0 60px rgba(0, 212, 255, 0.3);
+  }
+  .text-glow-gold {
+    text-shadow: 0 0 30px rgba(255, 215, 0, 0.7), 0 0 60px rgba(255, 215, 0, 0.3);
+  }
+  .border-glow {
+    border-color: rgba(0, 212, 255, 0.3);
+    box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.1) inset, 0 0 20px rgba(0, 212, 255, 0.05);
+  }
+  .bg-grid {
+    background-image: linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .gradient-text-blue {
+    background: linear-gradient(135deg, #ffffff 30%, #00d4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .gradient-text-gold {
+    background: linear-gradient(135deg, #ffd700 0%, #ff9f00 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes lineFlow {
+  0% { stroke-dashoffset: 1000; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes nodeGlow {
+  0%, 100% { r: 3; opacity: 0.4; }
+  50% { r: 5; opacity: 1; }
+}
+
+.animate-line-flow {
+  stroke-dasharray: 1000;
+  animation: lineFlow 4s linear infinite;
+}
